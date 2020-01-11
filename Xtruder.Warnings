@@ -1,0 +1,17 @@
+
+ Not all files will be checked                     (file filter)
+ Files with PBC set will not be checked.           (Check files with PBC set)
+ Read protected files will not be checked          (auto deprotect)
+
+ System messages will be suppressed                (suppress system messages)
+
+ Crunched executables are not checked              (decrunch executables)
+ Crunched data files are not checked               (decrunch data files)
+ Encrypted files are not checked                   (decrunch encrypted files)
+
+ Archives are not extracted                        (extract archives)
+ Not all archived files will be checked            (archive filter)
+ LhA archives are not checked                      (extract LhA)
+ Not all LhA archived files will be extracted      (LhA max size)
+ LZX archives are not checked                      (extract LZX)
+ Not all LZX archived files will be extracted      (LZX max size)

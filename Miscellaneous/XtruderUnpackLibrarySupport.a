@@ -1,0 +1,71 @@
+
+	opt l+
+
+	Incdir	INCLUDE:
+	Include	"exec/types.i"
+	Include	"exec/memory.i"
+	Include	"dos/dos.i"
+	Include	"libraries/unpack.i"
+	Include	"LVO/exec_lib.i"
+	Include	'LVO/dos_lib.i'
+	Include	"Functions.i"
+
+
+	XDEF	_xaListNextCruncher
+
+	XREF	_UnpackBase
+	XREF	_UInfo
+	XREF	_UPTypes
+	
+
+*****i* Xtruder/xaListNextCruncher ******************************************
+*
+*   NAME
+*	xaListNextCruncher -- List next known cruncher name
+*
+*   SYNOPSIS
+*	name = xaListNextCruncher( function )
+*			       D1
+*
+*	STRPTR xaListNextCruncher( LONG );
+*
+*   FUNCTION
+*	Return the next known cruncher name in the list
+*	
+*   INPUTS
+*	Function      -	0 if we need the first name in the list else 1
+*			
+*   RESULT
+*	Name	      - A pointer to the name or NULL if no more names
+*
+*****************************************************************************
+
+	SECTION xaListNextCruncher,CODE
+
+_xaListNextCruncher:
+	movem.l	d2-d7/a2-a6,-(sp)
+	
+	tst.l	d1
+	bne.b	.GET1
+
+	CALL	upNewUnpackNum,_UnpackBase
+	move.w	NS_Types(a0),_UPTypes
+	
+	move.l	_UInfo,a0
+	CALL	upUnpackList,_UnpackBase
+	move.l	a1,d0
+
+	bra.b	.END
+.GET1:
+	move.l	_UInfo,a0
+	CALL	upUnpackListNext,_UnpackBase
+	tst.l	d0
+	beq.w	.END
+	move.l	a1,d0
+.END:
+	movem.l	(sp)+,d2-d7/a2-a6
+	rts
+
+
+;_xaUnpackObjectJump:
+;	rts

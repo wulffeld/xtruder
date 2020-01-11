@@ -1,0 +1,25 @@
+LIBRARY=xtruder.library
+LIBVERS="xtruder.library 37.2 (2.11.95)"
+CC = sc:c/sc
+CFLAGS = LIBCODE PARM=R STRINGMERGE NOSTACKCHECK NOVERSION NOSTDIO
+LK = sc:c/slink
+LFLAGS = SMALLCODE SMALLDATA NOICONS
+OBJ = xtruder.library.o
+
+all: $(LIBRARY)
+
+$(LIBRARY): $(OBJ)
+	$(LK) WITH <<
+	$(LFLAGS)
+	FROM LIB:libent.o LIB:libinit.o $(OBJ)
+	LIB LIB:sc.lib
+	TO $(LIBRARY)
+	LIBFD FD:xtruder_lib.fd
+	LIBID $(LIBVERS)
+	LIBVERSION 37 LIBREVISION 2
+<
+	Copy $(LIBRARY) TO LIBS:$(LIBRARY)
+	Avail FLUSH
+
+xtruder.o:
+	$(CC) $(CFLAGS) $*.c

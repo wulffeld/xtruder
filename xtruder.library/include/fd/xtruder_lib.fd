@@ -1,0 +1,9 @@
+##base _XtruderBase
+##bias 30
+##public
+xlAllocXtruderInfo()()
+xlFreeXtruderInfo(xtruderinfo)(a0)
+xlCheckLVO(xtruderinfo)(a0)
+xlPatchListFirst(xtruderinfo)(a0)
+xlPatchListNext(xtruderinfo)(a0)
+##end
